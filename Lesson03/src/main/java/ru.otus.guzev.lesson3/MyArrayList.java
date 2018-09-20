@@ -1,84 +1,64 @@
 package ru.otus.guzev.lesson3;
 
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.function.UnaryOperator;
+import java.util.stream.Stream;
 
-public class MyArrayList <T> implements List {
+public class MyArrayList<T> implements List<T> {
 
-    private static final int DEFAULT_SIZE = 10;;
+    private static final int DEFAULT_SIZE = 1;;
 
     private T[] array;
 
+    private int arraySize;
+
+    private int pointOfInsert = 0;
+
 
     public MyArrayList() {
-
-        array = (T[]) new Object[DEFAULT_SIZE];
-
+        this.array = (T[]) new Object[DEFAULT_SIZE];
+        this.arraySize = array.length;
     }
 
     public MyArrayList(int customSize) throws IndexOutOfBoundsException {
-        if (customSize >= 0)
-            array = (T[]) new Object[customSize];
-        else throw  new IndexOutOfBoundsException("Incorrect list size");
+        if (customSize >= 0) {
+            this.array = (T[]) new Object[customSize];
+            this.arraySize = array.length;
+        } else {
+            throw new IndexOutOfBoundsException("Incorrect list size");
+        }
     }
 
+    private void checkAndResize (int pointOfInsert){
+        int delta = arraySize - pointOfInsert;
+        int newSize;
+        if (delta==0) {
+            newSize = arraySize+1;
+            arraySize = newSize;
+            this.array = Arrays.copyOf(this.array, newSize);
+        }
+    }
+
+
+    @Override
+    public boolean add(T t) {
+        checkAndResize(pointOfInsert);
+        array[pointOfInsert] = t;
+        pointOfInsert++;
+        return true;
+    }
+
+    @Override
+    public void sort(Comparator<? super T> c) {
+        Arrays.sort(array, c);
+
+    }
 
     @Override
     public int size() {
         return array.length;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return array.length == 0;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        boolean contains = false;
-        for (T element: array) {
-            if (element.equals((T)o))
-                contains = true;
-        };
-        return contains;
-    }
-
-    @Override
-    public Iterator iterator() {
-        return null;
-    }
-
-
-
-    @Override
-    public T[] toArray() {
-        return Arrays.copyOf(array, array.length);
-    }
-
-    @Override
-    public boolean add(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection c) {
-        return false;
-    }
-
-
-
-    @Override
-    public void clear() {
-
     }
 
     @Override
@@ -87,17 +67,54 @@ public class MyArrayList <T> implements List {
     }
 
     @Override
-    public Object set(int index, Object element) {
-        return null;
+    public T set(int index, T element) {
+        return array[index] = element;
     }
 
     @Override
-    public void add(int index, Object element) {
+    public String toString() {
+        return Arrays.toString(array);
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+
+
+    @Override
+    public void add(int index, T element) {
 
     }
 
     @Override
-    public Object remove(int index) {
+    public T remove(int index) {
         return null;
     }
 
@@ -112,38 +129,81 @@ public class MyArrayList <T> implements List {
     }
 
     @Override
-    public ListIterator listIterator() {
+    public ListIterator<T> listIterator() {
         return null;
     }
 
     @Override
-    public ListIterator listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         return null;
     }
 
     @Override
-    public List subList(int fromIndex, int toIndex) {
+    public List<T> subList(int fromIndex, int toIndex) {
+        return null;
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> action) {
+
+    }
+
+    @Override
+    public Spliterator<T> spliterator() {
+        return null;
+    }
+
+    @Override
+    public Stream<T> stream() {
+        return null;
+    }
+
+    @Override
+    public Stream<T> parallelStream() {
         return null;
     }
 
 
+
     @Override
-    public boolean retainAll(Collection c) {
+    public boolean isEmpty() {
         return false;
     }
 
     @Override
-    public boolean removeAll(Collection c) {
+    public boolean contains(Object o) {
         return false;
     }
 
     @Override
-    public boolean containsAll(Collection c) {
-        return false;
+    public Iterator<T> iterator() {
+        return null;
     }
 
     @Override
-    public Object[] toArray(Object[] a) {
+    public Object[] toArray() {
         return new Object[0];
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean removeIf(Predicate<? super T> filter) {
+        return false;
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator<T> operator) {
+
+    }
+
+
+
+    @Override
+    public void clear() {
+
     }
 }
