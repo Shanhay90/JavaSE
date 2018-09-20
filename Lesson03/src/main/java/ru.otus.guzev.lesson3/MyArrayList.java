@@ -13,7 +13,9 @@ public class MyArrayList <T> implements List {
 
 
     public MyArrayList() {
+
         array = (T[]) new Object[DEFAULT_SIZE];
+
     }
 
     public MyArrayList(int customSize) throws IndexOutOfBoundsException {
@@ -35,7 +37,12 @@ public class MyArrayList <T> implements List {
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        boolean contains = false;
+        for (T element: array) {
+            if (element.equals((T)o))
+                contains = true;
+        };
+        return contains;
     }
 
     @Override
