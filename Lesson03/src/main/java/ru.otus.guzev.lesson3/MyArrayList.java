@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class MyArrayList<T> implements List<T> {
 
-    private static final int DEFAULT_SIZE = 1;;
+    private static final int DEFAULT_SIZE = 1;
 
     private T[] array;
 
@@ -31,11 +31,11 @@ public class MyArrayList<T> implements List<T> {
         }
     }
 
-    private void checkAndResize (int pointOfInsert){
+    private void checkAndResize(int pointOfInsert) {
         int delta = arraySize - pointOfInsert;
         int newSize;
-        if (delta==0) {
-            newSize = arraySize+1;
+        if (delta == 0) {
+            newSize = arraySize + 1;
             arraySize = newSize;
             this.array = Arrays.copyOf(this.array, newSize);
         }
@@ -107,7 +107,6 @@ public class MyArrayList<T> implements List<T> {
     }
 
 
-
     @Override
     public void add(int index, T element) {
 
@@ -163,8 +162,6 @@ public class MyArrayList<T> implements List<T> {
         return null;
     }
 
-
-
     @Override
     public boolean isEmpty() {
         return false;
@@ -199,8 +196,6 @@ public class MyArrayList<T> implements List<T> {
     public void replaceAll(UnaryOperator<T> operator) {
 
     }
-
-
 
     @Override
     public void clear() {
