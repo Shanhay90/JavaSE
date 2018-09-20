@@ -1,9 +1,6 @@
 package ru.otus.guzev.lesson3;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class MyArrayList <T> implements List {
 
@@ -54,7 +51,7 @@ public class MyArrayList <T> implements List {
 
     @Override
     public T[] toArray() {
-        return array;
+        return Arrays.copyOf(array, array.length);
     }
 
     @Override
