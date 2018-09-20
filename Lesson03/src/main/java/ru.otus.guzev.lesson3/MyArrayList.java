@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class MyArrayList<T> implements List<T> {
 
-    private static final int DEFAULT_SIZE = 1;
+    private static final int DEFAULT_SIZE = 0;
 
     private T[] array;
 
