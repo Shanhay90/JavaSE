@@ -81,9 +81,9 @@
                         <option>-keep public class ru.otus.guzev.lesson01obfuscation.StartObfuscation{public static void
                             main(java.lang.String[]);}
                         </option>
-                        <option>-keep class org.apache.**
+                        <option>-keep class org.apache.http.** { *; }
                         </option>
-                        <option>-keep class com.mashape.**
+                        <option>-keep class org.apache.commons.logging.** { *; }
                         </option>
                         <option>-dontwarn</option>
                     </options>
