@@ -12,31 +12,26 @@ public class MyArrayList<T> implements List<T> {
 
     private T[] array;
 
-    private int arraySize;
-
     private int pointOfInsert = 0;
 
 
     public MyArrayList() {
         this.array = (T[]) new Object[DEFAULT_SIZE];
-        this.arraySize = array.length;
     }
 
     public MyArrayList(int customSize) throws IndexOutOfBoundsException {
         if (customSize >= 0) {
             this.array = (T[]) new Object[customSize];
-            this.arraySize = array.length;
         } else {
             throw new IndexOutOfBoundsException("Incorrect list size");
         }
     }
 
     private void checkAndResize(int pointOfInsert) {
-        int delta = arraySize - pointOfInsert;
+        int delta = array.length - pointOfInsert;
         int newSize;
         if (delta == 0) {
-            newSize = arraySize + 1;
-            arraySize = newSize;
+            newSize = array.length + 1;
             this.array = Arrays.copyOf(this.array, newSize);
         }
     }
