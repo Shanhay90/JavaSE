@@ -73,127 +73,176 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public boolean remove(Object o) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
-        return false;
+        throw new RuntimeException();
     }
 
 
     @Override
     public void add(int index, T element) {
-
+        throw new RuntimeException();
     }
 
     @Override
     public T remove(int index) {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        throw new RuntimeException();
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
+        throw new RuntimeException();
     }
 
     @Override
     public ListIterator<T> listIterator() {
-        return null;
+        return new ListIterator<T>() {
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                throw new RuntimeException();
+            }
+
+            @Override
+            public T next() {
+                Object o = array[index];
+                index++;
+                return (T) o;
+            }
+
+            @Override
+            public boolean hasPrevious() {
+                throw new RuntimeException();
+            }
+
+            @Override
+            public T previous() {
+                throw new RuntimeException();
+            }
+
+            @Override
+            public int nextIndex() {
+                throw new RuntimeException();
+            }
+
+            @Override
+            public int previousIndex() {
+                throw new RuntimeException();
+            }
+
+            @Override
+            public void remove() {
+                throw new RuntimeException();
+            }
+
+            @Override
+            public void set(T t) {
+                array[index-1] = t;
+            }
+
+            @Override
+            public void add(T t) {
+                throw new RuntimeException();
+            }
+        };
     }
 
     @Override
     public ListIterator<T> listIterator(int index) {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public void forEach(Consumer<? super T> action) {
-
+        throw new RuntimeException();
     }
 
     @Override
     public Spliterator<T> spliterator() {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public Stream<T> stream() {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public Stream<T> parallelStream() {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        throw new RuntimeException();
     }
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        throw new RuntimeException();
     }
 
     @Override
     public boolean removeIf(Predicate<? super T> filter) {
-        return false;
+        throw new RuntimeException();
     }
 
     @Override
     public void replaceAll(UnaryOperator<T> operator) {
-
+        throw new RuntimeException();
     }
 
     @Override
     public void clear() {
-
+        throw new RuntimeException();
     }
 }
