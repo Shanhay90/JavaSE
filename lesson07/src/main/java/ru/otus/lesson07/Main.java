@@ -8,13 +8,19 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
-        ATM atm  = new ATM().setAtmBalance(100, 10000, 10000, 10000, 10000);
+        ATM atm  = new ATM();
         System.out.println(atm.getAtmBalance());
-        List<Banknote> money = atm.getMoney(1750);
+        atm.setDefaultCapacity(100);
+        atm = atm.setDefaultStatus();
+        System.out.println(atm.getAtmBalance());
+        List<Banknote> money = atm.getMoney(6650);
         System.out.println(money.toString());
         System.out.println(atm.getAtmBalance());
-        atm.putMoneyInAtm(Banknote.FIFTY);
-        atm.putMoneyInAtm(Arrays.asList(Banknote.FIFTY, Banknote.ONEHUNDRED));
+        atm.putMoneyInAtm(Banknote.FIVEHUNDRED);
+        System.out.println(atm.getAtmBalance());
+        atm.putMoneyInAtm(Arrays.asList(Banknote.FIVEHUNDRED, Banknote.ONEHUNDRED));
+        System.out.println(atm.getAtmBalance());
+        atm.putMoneyInAtm(Banknote.FIVEHUNDRED, Banknote.ONEHUNDRED);
         System.out.println(atm.getAtmBalance());
     }
 }
