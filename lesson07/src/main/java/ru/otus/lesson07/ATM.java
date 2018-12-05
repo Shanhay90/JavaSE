@@ -27,7 +27,7 @@ public class ATM {
         this.defaultCapacity = defaultCapacity;
     }
 
-    public long getAtmBalance() {
+    public long getBalance() {
         long balance = 0;
         for (Map.Entry<Banknote, Integer> banknoteEntry : banknotesStorage.entrySet()) {
             balance += banknoteEntry.getKey().getNominal() * banknoteEntry.getValue();
@@ -37,7 +37,7 @@ public class ATM {
 
     private void checkRequestSum(int sum) throws IllegalArgumentException {
         boolean isRealSum = sum > 0;
-        boolean isLowThanMax = sum <= getAtmBalance();
+        boolean isLowThanMax = sum <= getBalance();
         int minNominal = banknotesStorage
                 .keySet()
                 .stream()
