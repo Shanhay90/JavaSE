@@ -50,10 +50,12 @@ public class ATM {
         }
     }
 
-    private void checkIssuedSum(int sum, List<Banknote> money) throws IllegalArgumentException {
+    private void checkIssuedSum(int sum, List<Banknote> money, Map<Banknote,Integer> storageBefore) throws IllegalArgumentException {
         int issuedSum = money.stream().mapToInt(Banknote::getNominal).sum();
         if (issuedSum != sum) {
+            this.banknotesStorage = storageBefore;
             throw new IllegalStateException("ОШИБКА: Банкоман не может выдать запрашиваемую сумму");
+
         }
     }
 
@@ -73,6 +75,7 @@ public class ATM {
 
     public List<Banknote> getMoney(int sum) throws IllegalArgumentException {
         checkRequestSum(sum);
+        Map <Banknote, Integer> storageBefore = new HashMap<>(banknotesStorage);
         Integer tempSum = sum;
         List<Banknote> money = new ArrayList<>();
         Banknote[] availableBanknotes = Banknote.values();
@@ -82,10 +85,8 @@ public class ATM {
             fillMoneyList(money, tempSum, banknote, issuedBanknotes);
             tempSum -= banknote.getNominal() * issuedBanknotes;
         }
-        checkIssuedSum(sum, money);
+        checkIssuedSum(sum, money, storageBefore);
         return money;
-
-
     }
 
     public void putMoneyInAtm(Banknote... banknotes) {
