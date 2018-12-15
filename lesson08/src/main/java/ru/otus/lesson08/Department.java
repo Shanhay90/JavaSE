@@ -7,9 +7,6 @@ public class Department {
 
     private List<ATM> atms;
 
-    private Department(){
-    }
-
     public Department(int valueOfAtm){
         this.atms = new ArrayList<>(valueOfAtm);
         for (int i = 0; i < valueOfAtm; i++) {
