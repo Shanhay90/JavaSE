@@ -14,8 +14,18 @@ public class Department {
         }
     }
 
-    public void setDepartmentDefaultStatus(){
+    public void resetDefaultStatus(){
         atms.forEach(ATM::setDefaultStatus);
+    }
+
+    public void backupAllAtm(){
+        atms.forEach(ATM::backup);
+        System.out.println("Произведено сохранения резервных копий банкоматов");
+    }
+
+    public void restoreAllAtm(){
+        atms.forEach(ATM::restore);
+        System.out.println("Произведено восстановление банкоматов");
     }
 
 
@@ -27,6 +37,10 @@ public class Department {
     }
 
     public List<ATM> getAtms() {
-        return atms;
+        return new ArrayList<>(atms);
+    }
+
+    public ATM getAtm(int index) {
+        return atms.get(index);
     }
 }

@@ -6,6 +6,7 @@ import java.util.*;
 
 public class ATM {
 
+    private AtmRestoreService atmRestoreService = new AtmRestoreService();
     private Map<Banknote, Integer> banknotesStorage;
     private int defaultCapacity = 500;
 
@@ -15,13 +16,20 @@ public class ATM {
         setDefaultStatus();
     }
 
-    public ATM setDefaultStatus() {
+    public void setDefaultStatus() {
         for (Banknote banknote : Banknote.values()) {
             banknotesStorage.put(banknote, defaultCapacity);
         }
-        return this;
     }
 
+
+    public void backup(){
+        atmRestoreService.saveBackup(new AtmBackup(this.banknotesStorage));
+    }
+
+    public void restore(){
+        this.banknotesStorage = atmRestoreService.restoreFromBackup().restore();
+    }
 
     public void setDefaultCapacity(int defaultCapacity) {
         this.defaultCapacity = defaultCapacity;

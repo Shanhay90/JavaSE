@@ -19,5 +19,5 @@ public enum Banknote {
         return nominal;
     }
 
-    public static Comparator<Banknote> banknoteComparator = Comparator.comparingInt(Banknote::getNominal).reversed();
+    public final static Comparator<Banknote> banknoteComparator = Comparator.comparingInt(Banknote::getNominal).reversed();
 }
