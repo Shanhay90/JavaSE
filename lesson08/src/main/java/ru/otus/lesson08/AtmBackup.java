@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AtmBackup {
-  private Map<Banknote, Integer> storageBackup;
+  private final Map<Banknote, Integer> storageBackup;
 
   public AtmBackup(Map<Banknote, Integer> stateToSave){
       this.storageBackup = new HashMap<>(stateToSave);
