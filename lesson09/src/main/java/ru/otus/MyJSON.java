@@ -118,7 +118,9 @@ public class MyJSON {
 
 
     private boolean isCharacterOrString(Class type) {
-        return type.getSimpleName().equals("Character") || type.getSimpleName().equals("String");
+        return type.getSimpleName().equals("Character")
+                || type.getSimpleName().equals("String")
+                || type.getSimpleName().equals("char") ;
     }
 
     private void serializeCharAndString(Object obj) {

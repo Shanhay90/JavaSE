@@ -15,4 +15,5 @@ public class Car {
     private String model;
     private Engine engine;
     private List<Wheel> wheels;
+    private char literal;
 }
