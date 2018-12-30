@@ -33,8 +33,7 @@ public class MyJSON {
                 .filter(field -> !Modifier.isTransient(field.getModifiers()))
                 .collect(Collectors.toList());
 
-        for (int i = 0; i < fields.size(); i++) {
-            Field tempField = fields.get(i);
+        for (Field tempField : fields) {
             tempField.setAccessible(true);
             Class fieldType = tempField.getType();
             builder.append(tempField.getName()).append(" : ");
@@ -81,16 +80,21 @@ public class MyJSON {
     }
 
     private void serializeInArrayOrCollection(Object objectInArray) throws IllegalAccessException {
-        if (isPrimitiveOrString(objectInArray.getClass())) {
-            if (isCharacterOrString(objectInArray.getClass())) {
-                serializeCharAndString(objectInArray);
-            } else {
-                serializeSimpleField(objectInArray);
-            }
+        if (objectInArray == null) {
+            builder.append("null");
         } else {
-            builder.append("{");
-            serializeObject(objectInArray);
-            builder.append("}");
+
+            if (isPrimitiveOrString(objectInArray.getClass())) {
+                if (isCharacterOrString(objectInArray.getClass())) {
+                    serializeCharAndString(objectInArray);
+                } else {
+                    serializeSimpleField(objectInArray);
+                }
+            } else {
+                builder.append("{");
+                serializeObject(objectInArray);
+                builder.append("}");
+            }
         }
         builder.append(", ");
     }
