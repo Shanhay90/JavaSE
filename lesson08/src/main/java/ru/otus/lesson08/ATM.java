@@ -14,6 +14,7 @@ public class ATM {
     public ATM() {
         this.banknotesStorage = new HashMap<>();
         setDefaultStatus();
+        backup();
     }
 
     public void setDefaultStatus() {
