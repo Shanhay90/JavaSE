@@ -36,7 +36,12 @@ public class MyJSON {
         for (Field tempField : fields) {
             tempField.setAccessible(true);
             Class fieldType = tempField.getType();
-            builder.append(tempField.getName()).append(" : ");
+
+            builder.append("\"")
+                    .append(tempField.getName())
+                    .append("\"")
+                    .append(":");
+
             if (tempField.get(object) == null) {
                 builder.append(" null, ");
             } else {
@@ -47,7 +52,6 @@ public class MyJSON {
                         for (Object objectInCollection : collectionInField) {
                             serializeInArrayOrCollection(objectInCollection);
                         }
-                        builder.deleteCharAt(builder.lastIndexOf(" "));
                         builder.deleteCharAt(builder.lastIndexOf(","));
                         builder.append("]");
                     } else if (fieldType.isArray()) {
@@ -56,7 +60,6 @@ public class MyJSON {
                             Object objectInArray = Array.get(tempField.get(object), x);
                             serializeInArrayOrCollection(objectInArray);
                         }
-                        builder.deleteCharAt(builder.lastIndexOf(" "));
                         builder.deleteCharAt(builder.lastIndexOf(","));
                         builder.append("]");
                     } else {
@@ -71,10 +74,9 @@ public class MyJSON {
                         serializeSimpleField(tempField.get(object));
                     }
                 }
-                builder.append(", ");
+                builder.append(",");
             }
         }
-        builder.deleteCharAt(builder.lastIndexOf(" "));
         builder.deleteCharAt(builder.lastIndexOf(","));
 
     }
@@ -96,7 +98,7 @@ public class MyJSON {
                 builder.append("}");
             }
         }
-        builder.append(", ");
+        builder.append(",");
     }
 
 

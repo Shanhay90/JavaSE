@@ -1,5 +1,7 @@
 package ru.otus;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,8 @@ public class Main {
         car.setWheels(wheels);
         MyJSON json = new MyJSON();
         System.out.println(json.toJSON(car));
+
+        System.out.println(new Gson().toJson(car));
     }
 
 
