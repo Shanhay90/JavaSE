@@ -21,7 +21,6 @@ public class Main {
         wheels.add(new Wheel(false, 18));
         car.setWheels(wheels);
         MyJSON json = new MyJSON();
-
         String myJson  = json.toJSON(car).toString();
         System.out.println(myJson);
         Car car1 = new Gson().fromJson(myJson, Car.class);
@@ -31,6 +30,16 @@ public class Main {
 
         System.out.println(gson.equalsIgnoreCase(myJson));
         System.out.println(car.equals(car1));
+        System.out.println(gson);
+        System.out.println(new MyJSON().toJSON(123));
+        System.out.println(new MyJSON().toJSON("ABC"));
+        System.out.println(new MyJSON().toJSON(null));
+        System.out.println(new MyJSON().toJSON(true));
+
+
+
+
+
     }
 
 

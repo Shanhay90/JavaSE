@@ -19,9 +19,21 @@ public class MyJSON {
     }
 
     public MyJSON toJSON(Object object) throws IllegalAccessException {
-        builder.append("{");
-        serializeObject(object);
-        builder.append("}");
+        if (object == null || isPrimitiveOrString(object.getClass())) {
+            if (object==null) {
+                builder.append("null");
+            }else if (isCharacterOrString(object.getClass())){
+                serializeCharAndString(object);
+            }else {
+                serializeSimpleField(object);
+            }
+        } else {
+            builder.append("{");
+            serializeObject(object);
+            builder.append("}");
+            this.result += builder.toString();
+            return this;
+        }
         this.result += builder.toString();
         return this;
     }
@@ -103,29 +115,27 @@ public class MyJSON {
 
 
     private boolean isPrimitiveOrString(Class type) {
-        String className = type.getSimpleName();
-        return className.equals("Integer")
-                || className.equals("String")
-                || className.equals("Boolean")
-                || className.equals("Character")
-                || className.equals("Short")
-                || className.equals("Long")
-                || className.equals("Byte")
-                || className.equals("Float")
-                || className.equals("Double")
+        return type.equals(Integer.class)
+                || type.equals(String.class)
+                || type.equals(Boolean.class)
+                || type.equals(Character.class)
+                || type.equals(Short.class)
+                || type.equals(Long.class)
+                || type.equals(Byte.class)
+                || type.equals(Float.class)
+                || type.equals(Double.class)
                 || type.isPrimitive();
     }
 
 
     private boolean isCharacterOrString(Class type) {
-        return type.getSimpleName().equals("Character")
-                || type.getSimpleName().equals("String")
-                || type.getSimpleName().equals("char") ;
+        return type.equals(Character.class)
+                || type.equals(String.class)
+                || type.equals(char.class);
     }
 
     private void serializeCharAndString(Object obj) {
-        builder
-                .append("\"")
+        builder.append("\"")
                 .append(obj)
                 .append("\"");
     }
