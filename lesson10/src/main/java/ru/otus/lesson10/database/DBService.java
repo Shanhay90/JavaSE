@@ -31,7 +31,7 @@ public class DBService implements DBServiceInterface {
     public void prepareTables() {
         Executor executor = new Executor(connection);
         executor.execUpdate(CREATE_TABLE_USER, statement -> {
-            if (statement.executeUpdate()!=0){ throw new SQLException("1111");}
+            if (statement.executeUpdate()!=0){ throw new SQLException("Неверно выполнен запрос в БД");}
         });
     }
 
@@ -50,7 +50,7 @@ public class DBService implements DBServiceInterface {
     public void deleteTables() {
         Executor executor = new Executor(connection);
         executor.execUpdate(DELETE_USER_TABLE, statement -> {
-            if (statement.executeUpdate()!=0){ throw new SQLException("2222");}
+            if (statement.executeUpdate()!=0){ throw new SQLException("Неверно выполнен запрос в БД");}
         });
     }
 
