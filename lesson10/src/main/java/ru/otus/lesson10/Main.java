@@ -1,13 +1,13 @@
 package ru.otus.lesson10;
 
 import ru.otus.lesson10.database.DBService;
-import ru.otus.lesson10.database.DBServiceInterface;
+import ru.otus.lesson10.database.DBServicePrepared;
 import ru.otus.lesson10.user.UserDataSet;
 
 
 public class Main {
     public static void main(String[] args) throws Exception{
-        try(DBServiceInterface service = new DBService()){
+        try(DBService service = new DBServicePrepared()){
             System.out.println(service.getMetaData());
             service.prepareTables();
             UserDataSet user = new UserDataSet();
