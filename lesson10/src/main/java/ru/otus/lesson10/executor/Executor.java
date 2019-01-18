@@ -44,8 +44,8 @@ public class Executor {
                 if (i < fields.length - 1) {
                     names = names.concat(",");
                     values = values.concat(",");
-                    field.setAccessible(isAccessible);
                 }
+                field.setAccessible(isAccessible);
             }
             PreparedStatement statement = connection.prepareStatement(String.format(ADD_USER_REQUEST, names, values));
             statement.executeUpdate();
