@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 public class DBServicePrepared implements DBService {
 
-    private static final String CREATE_TABLE_USER = "create table if not exists user (id int auto_increment, \"name\" varchar(256), \"age\" integer(3), primary key (id))";
+    private static final String CREATE_TABLE_USER = "create table if not exists user (id bigint(20) auto_increment, \"name\" varchar(256), \"age\" integer(3), primary key (id))";
     private static final String DELETE_USER_TABLE = "drop table user";
 
 
