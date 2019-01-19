@@ -6,11 +6,11 @@ public interface DBService extends AutoCloseable{
 
     String getMetaData();
 
-    void prepareTables();
+    void prepareTables(Class clazz);
 
     void addUser(UserDataSet userDataSet);
 
     UserDataSet getUser(long id);
 
-    void deleteTables();
+    void deleteTables(Class clazz);
 }

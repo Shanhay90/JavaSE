@@ -11,8 +11,8 @@ import java.sql.SQLException;
 
 public class Executor {
 
-    private final String ADD_USER_REQUEST = "INSERT INTO user (%s) VALUES (%s)";
-    private final String GET_USER_BY_ID = "SELECT * FROM user WHERE id = %s";
+    private final String ADD_REQUEST = "INSERT INTO %s (%s) VALUES (%s)";
+    private final String GET_BY_ID = "SELECT * FROM %s WHERE id = %s";
 
     private final Connection connection;
 
@@ -32,6 +32,7 @@ public class Executor {
 
     public <T extends DataSet> void save(T user) {
         try {
+            String tableName = user.getClass().getSimpleName();
             String names = "";
             String values = "";
             Field[] fields = user.getClass().getDeclaredFields();
@@ -47,7 +48,7 @@ public class Executor {
                 }
                 field.setAccessible(isAccessible);
             }
-            PreparedStatement statement = connection.prepareStatement(String.format(ADD_USER_REQUEST, names, values));
+            PreparedStatement statement = connection.prepareStatement(String.format(ADD_REQUEST,tableName, names, values));
             statement.executeUpdate();
         } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
@@ -56,7 +57,8 @@ public class Executor {
 
     public <T extends DataSet> T load(long id, Class<T> clazz) {
         try {
-            PreparedStatement statement = connection.prepareStatement(String.format(GET_USER_BY_ID, id));
+            String tableName = clazz.getSimpleName();
+            PreparedStatement statement = connection.prepareStatement(String.format(GET_BY_ID,tableName, id));
             ResultSet result = statement.executeQuery();
             T user = clazz.getConstructor().newInstance();
             Field[] fields = user.getClass().getDeclaredFields();

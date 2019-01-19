@@ -9,8 +9,8 @@ import java.sql.SQLException;
 
 public class DBServicePrepared implements DBService {
 
-    private static final String CREATE_TABLE_USER = "create table if not exists user (id bigint(20) auto_increment, \"name\" varchar(256), \"age\" integer(3), primary key (id))";
-    private static final String DELETE_USER_TABLE = "drop table user";
+    private static final String CREATE_TABLE_FOR_CLAZZ = "create table if not exists %s (id bigint(20) auto_increment, \"name\" varchar(256), \"age\" integer(3), primary key (id))";
+    private static final String DELETE_TABLE_FOR_CLAZZ = "drop table %s";
 
 
     private final Connection connection;
@@ -28,9 +28,10 @@ public class DBServicePrepared implements DBService {
 
     }
     @Override
-    public void prepareTables() {
+    public void  prepareTables(Class clazz) {
+        String tableName = clazz.getSimpleName();
         Executor executor = new Executor(connection);
-        executor.execUpdate(CREATE_TABLE_USER, statement -> {
+        executor.execUpdate(String.format(CREATE_TABLE_FOR_CLAZZ, tableName), statement -> {
             if (statement.executeUpdate()!=0){ throw new SQLException("Неверно выполнен запрос в БД");}
         });
     }
@@ -47,9 +48,10 @@ public class DBServicePrepared implements DBService {
         return executor.load(id, UserDataSet.class);
     }
     @Override
-    public void deleteTables() {
+    public void deleteTables(Class clazz) {
+        String tableName = clazz.getSimpleName();
         Executor executor = new Executor(connection);
-        executor.execUpdate(DELETE_USER_TABLE, statement -> {
+        executor.execUpdate(String.format(DELETE_TABLE_FOR_CLAZZ, tableName), statement -> {
             if (statement.executeUpdate()!=0){ throw new SQLException("Неверно выполнен запрос в БД");}
         });
     }

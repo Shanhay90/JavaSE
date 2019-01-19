@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws Exception{
         try(DBService service = new DBServicePrepared()){
             System.out.println(service.getMetaData());
-            service.prepareTables();
+            service.prepareTables(UserDataSet.class);
             UserDataSet user = new UserDataSet();
             user.setName("Joe");
             user.setAge(22);
@@ -20,7 +20,7 @@ public class Main {
             service.addUser(user2);
             UserDataSet userFromTable = service.getUser(1);
             System.out.println(userFromTable.toString());
-            service.deleteTables();
+            service.deleteTables(UserDataSet.class);
         }
     }
 }
