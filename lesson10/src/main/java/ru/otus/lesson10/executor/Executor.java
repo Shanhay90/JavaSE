@@ -50,6 +50,11 @@ public class Executor {
             }
             PreparedStatement statement = connection.prepareStatement(String.format(ADD_REQUEST,tableName, names, values));
             statement.executeUpdate();
+            /*
+            ResultSet set = statement.getGeneratedKeys();
+            set.next();
+            user.setId(set.getLong(1));
+            */
         } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
