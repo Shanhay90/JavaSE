@@ -4,10 +4,7 @@ import ru.otus.lesson10.user.DataSet;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class Executor {
 
@@ -48,13 +45,11 @@ public class Executor {
                 }
                 field.setAccessible(isAccessible);
             }
-            PreparedStatement statement = connection.prepareStatement(String.format(ADD_REQUEST,tableName, names, values));
+            PreparedStatement statement = connection.prepareStatement(String.format(ADD_REQUEST,tableName, names, values), Statement.RETURN_GENERATED_KEYS);
             statement.executeUpdate();
-            /*
             ResultSet set = statement.getGeneratedKeys();
             set.next();
             user.setId(set.getLong(1));
-            */
         } catch (SQLException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }

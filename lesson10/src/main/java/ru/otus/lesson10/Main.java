@@ -18,6 +18,7 @@ public class Main {
             user2.setName("Jane");
             user2.setAge(15);
             service.addUser(user2);
+            System.out.println(user2);
             UserDataSet userFromTable = service.getUser(1);
             System.out.println(userFromTable.toString());
             service.deleteTables(UserDataSet.class);
